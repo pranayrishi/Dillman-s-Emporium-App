@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dillmans_emporium_app/pages/home.dart';
-import 'package:dillmans_emporium_app/pages/message.dart';
+import 'package:dillmans_emporium_app/pages/Chat/message.dart';
 import 'package:dillmans_emporium_app/pages/account.dart';
 import 'package:dillmans_emporium_app/pages/settings.dart';
 

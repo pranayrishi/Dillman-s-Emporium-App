@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1052203106571",
+    "project_id": "dillmans-emporium-app-48b4e",
+    "storage_bucket": "dillmans-emporium-app-48b4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052203106571:android:5a8d5b61b363346537620e",
+        "android_client_info": {
+          "package_name": "com.example.dillmans_emporium_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052203106571-fl74r7pr35okq458ot51e5ea8k1701ut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk_mqEJYjqH64Rp4iw6ytfLl498TZT0RU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052203106571-fl74r7pr35okq458ot51e5ea8k1701ut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

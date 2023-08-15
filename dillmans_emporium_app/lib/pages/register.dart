@@ -1,14 +1,19 @@
+import 'package:dillmans_emporium_app/homepage.dart';
 import 'package:dillmans_emporium_app/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:dillmans_emporium_app/pages/Chat/Methods.dart';
 
 class MyRegister extends StatefulWidget {
-  const MyRegister({Key? key}) : super(key: key);
-
   @override
   _MyRegisterState createState() => _MyRegisterState();
 }
 
 class _MyRegisterState extends State<MyRegister> {
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -130,7 +135,40 @@ class _MyRegisterState extends State<MyRegister> {
                                 backgroundColor: Color(0xff4c505b),
                                 child: IconButton(
                                     color: Colors.white,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      if (_name.text.isNotEmpty &&
+                                          _email.text.isNotEmpty &&
+                                          _password.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+
+                                        createAccount(_name.text, _email.text,
+                                                _password.text)
+                                            .then((user) => {
+                                                  if (user != null)
+                                                    {
+                                                      setState(() {
+                                                        isLoading = false;
+                                                      }), // if problem occurs, change "," to ";"
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (_) =>
+                                                                  HomePage())),
+                                                      print(
+                                                          "Account Created Successfully"), // if problem occurs, change "," to ";"
+                                                    }
+                                                  else
+                                                    {
+                                                      print(
+                                                          "Login Failed"), // if problem occurs, change "," to ";"
+                                                    }
+                                                });
+                                      } else {
+                                        print("Please enter Fields");
+                                      }
+                                    },
                                     icon: Icon(
                                       Icons.arrow_forward,
                                     )),

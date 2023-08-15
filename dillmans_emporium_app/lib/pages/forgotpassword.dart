@@ -1,6 +1,7 @@
 // Use this video to add functionality later on: https://www.youtube.com/watch?v=Sp4_2zi0kZg
 
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class PasswordReset extends StatefulWidget {
   const PasswordReset({super.key});
@@ -11,6 +12,37 @@ class PasswordReset extends StatefulWidget {
 
 class _PasswordResetState extends State<PasswordReset> {
   final _emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  Future passwordReset() async {
+    try {
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: _emailController.text.trim());
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text("Password Reset Link sent! Check your email"),
+          );
+        },
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(e.message.toString()),
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +83,7 @@ class _PasswordResetState extends State<PasswordReset> {
           ),
           SizedBox(height: 10),
           MaterialButton(
-              onPressed: () {},
+              onPressed: passwordReset,
               child: Text("Reset Password"),
               color: Colors.deepPurple[200])
         ],

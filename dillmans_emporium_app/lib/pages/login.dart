@@ -1,16 +1,20 @@
+import 'package:dillmans_emporium_app/homepage.dart';
 import 'package:dillmans_emporium_app/pages/forgotpassword.dart';
 import 'package:dillmans_emporium_app/pages/register.dart';
 import 'package:flutter/material.dart';
+import 'package:dillmans_emporium_app/pages/Chat/Methods.dart';
 
 class MyLogin extends StatefulWidget {
-  const MyLogin({Key? key}) : super(key: key);
-
   @override
   _MyLoginState createState() => _MyLoginState();
 }
 
 class _MyLoginState extends State<MyLogin> {
   @override
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  bool isLoading = false;
+
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -53,6 +57,13 @@ class _MyLoginState extends State<MyLogin> {
                           SizedBox(
                             height: 30,
                           ),
+                          /*
+                          Container(
+                            width: size.width,
+                            alignment: Alignment.center,
+                            child: field(size, "email", Icons.account_box, _email)
+                          )
+                          */
                           TextField(
                             style: TextStyle(),
                             obscureText: true,
@@ -80,7 +91,37 @@ class _MyLoginState extends State<MyLogin> {
                                 backgroundColor: Color(0xff4c505b),
                                 child: IconButton(
                                     color: Colors.white,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      //Login Functinoality Here
+                                      if (_email.text.isNotEmpty &&
+                                          _password.text.isNotEmpty) {
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+
+                                        logIn(_email.text, _password.text)
+                                            .then((user) {
+                                          if (user != null) {
+                                            print("Login Successfull");
+                                            setState(() {
+                                              isLoading = false;
+                                            });
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        HomePage()));
+                                          } else {
+                                            print("Login Failed");
+                                            setState(() {
+                                              isLoading = false;
+                                            });
+                                          }
+                                        });
+                                      } else {
+                                        print("Please fill form correctly");
+                                      }
+                                    },
                                     icon: Icon(
                                       Icons.arrow_forward,
                                     )),
